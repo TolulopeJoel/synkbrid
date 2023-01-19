@@ -1,0 +1,73 @@
+table.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin-top: 20px;
+}
+
+table.tasks-table th {
+  background-color: #f6f9fc;
+  color: #425a70;
+  font-weight: bold;
+  padding: 15px;
+  border: 1px solid #dddddd;
+  text-align: left;
+}
+
+table.tasks-table td {
+  padding: 15px;
+  border: 1px solid #dddddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+table.tasks-table td a {
+  color: #425a70;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+table.tasks-table td a:hover {
+  color: #006699;
+}
+
+/* Add styling for the statuses */
+table.tasks-table td.status {
+  text-align: center;
+  font-weight: bold;
+}
+
+table.tasks-table td.status.in-review {
+  color: #ffc107;
+}
+table.tasks-table td.status.suspended {
+  color: #6c757d;
+}
+table.tasks-table td.status.in-progress {
+  color: #007bff;
+}
+table.tasks-table td.status.completed {
+  color: #28a745;
+}
+table.tasks-table td.status.not-started {
+  color: #f44336;
+}
+
+table.tasks-table tr:hover {
+  background-color: #f6f9fc;
+}
+
+a.create-button {
+  background-color: #006699;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+a.create-button:hover {
+  background-color: #004c73;
+}

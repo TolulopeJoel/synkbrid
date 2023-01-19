@@ -1,0 +1,30 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<table class="tasks-table">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Due Date</th>
+      <th>Assignee</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <td><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
+      <td>{{ task.description|truncatewords:20 }}</td>
+      <td>{{ task.due_date }}</td>
+      <td>{{ task.assignee }}</td>
+      <td class="status {{ task.status }}">{{ task.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'task_create' %}" class="create-button">Create New Task</a>
