@@ -1,0 +1,20 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+</head>
+
+<body>
+
+<div class="create-task-container">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Task</label>
+      {{form}}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Task</button>
+  </form>
+</div>
+
+</body>

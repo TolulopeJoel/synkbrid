@@ -1,0 +1,30 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}">
+</head>
+
+<div class="notion-detail-view">
+    <div class="task-header">
+        <h1 class="task-name">{{ task.name }}</h1>
+        <div class="task-status {{ task.status }}">{{ task.status }}</div>
+    </div>
+    <div class="task-details">
+        <div class="task-description">
+            <h2>Description</h2>
+            <p>{{ task.description }}</p>
+        </div>
+        <div class="task-due-date">
+            <h2>Due Date</h2>
+            <p>{{ task.due_date }}</p>
+        </div>
+        <div class="task-assignee">
+            <h2>Assignee</h2>
+            <p>{{ task.assignee }}</p>
+        </div>
+    </div>
+    <div class="task-actions">
+        <a href="{% url 'task_edit' task.id %}" class="edit-button">Edit</a>
+        <a href="{% url 'task_delete' task.id %}" class="delete-button">Delete</a>
+    </div>
+</div>

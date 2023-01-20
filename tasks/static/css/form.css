@@ -1,0 +1,83 @@
+.create-task-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.create-task-container form {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #ccc;
+    width: 60%;
+}
+
+.create-task-container label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.create-task-container input[type="text"],
+.create-task-container textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 10px #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.create-task-container select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 10px #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.create-task-container button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.create-task-container button[type="submit"]:hover {
+    background-color: #3e8e41;
+    transform: scale(1.05);
+}
+
+
+.create-task-container input[type="text"]:focus,
+.create-task-container textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 20px #4CAF50;
+}
+
+.create-task-container select:focus {
+  outline: none;
+  box-shadow: 0px 0px 20px #4CAF50;
+}
+
+.create-task-container ::placeholder {
+  color: #ccc;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+.create-task-container input[type="date"] {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 10px #ccc;
+  margin-bottom: 1.5rem;
+}
