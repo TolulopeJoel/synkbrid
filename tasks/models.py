@@ -12,7 +12,8 @@ class Task(models.Model):
     )
     name = models.CharField(max_length=255)
     description = models.TextField()
-    due_date = models.DateField()
+    start_date = models.DateTimeField()
+    due_date = models.DateTimeField()
     assignee = models.ForeignKey(
         get_user_model(),
         related_name='assignee',

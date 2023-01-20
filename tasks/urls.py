@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete/<int:id>/', views.TaskDelete.as_view(), name='task_delete'),
     path('update/<int:id>/', views.TaskUpdate.as_view(), name='task_edit'),
     path('<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
+    path('tasks/', views.task_data, name='task_data'),
+    path('calendar/', views.calendar, name='cal'),
 ]
