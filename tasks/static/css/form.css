@@ -39,7 +39,7 @@
 }
 
 .create-task-container button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #6a82f9;
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -51,7 +51,7 @@
 }
 
 .create-task-container button[type="submit"]:hover {
-    background-color: #3e8e41;
+    background-color: #82a4fa;
     transform: scale(1.05);
 }
 

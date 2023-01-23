@@ -1,3 +1,11 @@
+.container {
+  padding-right: 50px;
+  padding-left: 50px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 table.tasks-table {
   width: 100%;
   border-collapse: collapse;
@@ -15,7 +23,7 @@ table.tasks-table th {
 }
 
 table.tasks-table td {
-  padding: 15px;
+  padding: 30px;
   border: 1px solid #dddddd;
   text-align: left;
   font-size: 14px;
@@ -25,6 +33,10 @@ table.tasks-table td a {
   color: #425a70;
   text-decoration: none;
   font-size: 14px;
+}
+
+.task-title{
+  text-decoration: underline;
 }
 
 table.tasks-table td a:hover {
@@ -58,16 +70,61 @@ table.tasks-table tr:hover {
 }
 
 a.create-button {
-  background-color: #006699;
+  background-color: #6a82f9;
   color: #ffffff;
   padding: 10px 15px;
   border-radius: 5px;
   text-decoration: none;
-  font-size: 14px;
   margin-top: 20px;
   display: inline-block;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 a.create-button:hover {
-  background-color: #004c73;
+  background-color: #82a4fa;
+}
+
+
+.filter {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.filter input[type='submit'] {
+  background-color: #6a82f9;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.filter select, .filter input[type='text'] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.filter select {
+  background-color: #f0f0f0;
+}
+
+.filter input[type='text'] {
+  background-color: #ffffff;
+}
+
+.filter input[type='submit']:hover {
+  background-color: #82a4fa;
 }
