@@ -3,14 +3,17 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django_filters.views import FilterView
 
+from .filters import TaskFilter
 from .forms import TaskForm
 from .models import Task
 
 
-class TaskList(generic.ListView):
+class TaskListView(FilterView):
     model = Task
-    context_object_name = 'tasks'
+    template_name = 'tasks/task_list.html'
+    filterset_class = TaskFilter
 
 
 class TaskDetail(LoginRequiredMixin, generic.DetailView):
@@ -35,7 +38,7 @@ class TaskCreate(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-# A JSON representation of tasks
+# A JSON representation of tasks to display tasks on calendar
 def task_data(request):
     tasks = Task.objects.all()
     task_list = []

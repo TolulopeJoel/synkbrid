@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     
     # local apps
     'tasks.apps.TasksConfig',
+    
+    # third party apps
+    'django_filters',
 ]
 
 MIDDLEWARE = [
