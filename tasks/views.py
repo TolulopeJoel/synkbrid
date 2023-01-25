@@ -22,10 +22,12 @@ class TaskDetail(LoginRequiredMixin, generic.DetailView):
 
 class TaskUpdate(LoginRequiredMixin, generic.UpdateView):
     model = Task
-
-
-class TaskDelete(LoginRequiredMixin, generic.DeleteView):
-    model = Task
+    fields = ('name', 'description', 'status',)
+    success_url = reverse_lazy('task_list')
+    
+    def get_context_data(self, **kwargs):
+        context = {'action': 'Edit'}
+        return super().get_context_data(**context)
 
 
 class TaskCreate(LoginRequiredMixin, generic.CreateView):
@@ -36,6 +38,14 @@ class TaskCreate(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.assignee = self.request.user
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = {'action': 'Create'}
+        return super().get_context_data(**context)
+
+
+class TaskDelete(LoginRequiredMixin, generic.DeleteView):
+    model = Task
 
 
 # A JSON representation of tasks to display tasks on calendar
