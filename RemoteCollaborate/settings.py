@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     # local apps
     'tasks.apps.TasksConfig',
+    'accounts.apps.AccountsConfig',
     
     # third party apps
     'django_filters',
