@@ -1,49 +1,37 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
+{% block title %} All Tasks {% endblock %}
 
-<body class="container">
+{% block content %}
+<table class="tasks-table">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Due Date</th>
+      <th>Assignee</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% with tasks=filter.qs %}
+    {% for task in tasks %}
+      <a href="{% url 'task_detail' task.id %}">
+        <tr>
+          <td class="task-title"><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
+          <td>{{ task.description|truncatewords:20 }}</td>
+          <td>{{ task.due_date }}</td>
+          <td>{{ task.assignee }}</td>
+          <td class="status {{ task.status }}">{{ task.status }}</td>
+        </tr>
+      </a>
+    {% endfor %}
+    {% endwith %}
+  </tbody>
+</table>
 
-  <form method="get" class="filter">
-    {{ filter.form }}
-    <input type="submit" value="Filter">
-  </form>
-  <div>
-    <a href="{% url 'accounts' task.id %}"></a>
-  </div>
+<a href="{% url 'task_create' %}" class="create-button">Create New Task</a>
 
-  <table class="tasks-table">
-    <thead>
-      <tr>
-        <th>Task</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Assignee</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% with tasks=filter.qs %}
-      {% for task in tasks %}
-        <a href="{% url 'task_detail' task.id %}">
-          <tr>
-            <td class="task-title"><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
-            <td>{{ task.description|truncatewords:20 }}</td>
-            <td>{{ task.due_date }}</td>
-            <td>{{ task.assignee }}</td>
-            <td class="status {{ task.status }}">{{ task.status }}</td>
-          </tr>
-        </a>
-      {% endfor %}
-      {% endwith %}
-    </tbody>
-  </table>
-
-  <a href="{% url 'task_create' %}" class="create-button">Create New Task</a>
-
-  <!-- calender view of tasks -->
-  {% include 'calendar.html' %}
-
-</body>
+<!-- calender view of tasks -->
+{% include 'calendar.html' %}
+{% endblock %}

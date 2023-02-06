@@ -1,11 +1,8 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
-</head>
+{% block title %} Create Task {% endblock %}
 
-<body>
-
+{% block content %}
 <div class="create-task-container">
   <form method="post">
     {% csrf_token %}
@@ -16,5 +13,4 @@
     <button type="submit" class="btn btn-primary">{{action}} Task</button>
   </form>
 </div>
-
-</body>
+{% endblock %}

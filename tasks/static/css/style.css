@@ -90,6 +90,7 @@ a.create-button:hover {
 
 .filter {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 12px;
   background-color: #f6f6f6;
@@ -97,7 +98,7 @@ a.create-button:hover {
   margin-bottom: 16px;
 }
 
-.filter input[type='submit'] {
+.filter input[type='submit'], .filter .logout {
   background-color: #6a82f9;
   color: white;
   padding: 10px 20px;

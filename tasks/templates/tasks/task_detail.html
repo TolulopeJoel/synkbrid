@@ -1,8 +1,8 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}">
-</head>
+{% block title %} "{{ task.name }}" Detail {% endblock %}
+
+{% block content %}
 
 <div class="notion-detail-view">
     <div class="task-header">
@@ -28,3 +28,5 @@
         <a href="{% url 'task_delete' task.id %}" class="delete-button">Delete</a>
     </div>
 </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Remote Collaborate {% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}">
+</head>
+
+<body class="container">
+    <div class="filter">
+        <a href="{% url 'task_list' %}" class="logout">Home</a>
+
+        {% if filter %}
+            <form method="get">
+                {{ filter.form }}
+                <input type="submit" value="Filter">
+            </form>
+        {% endif %}
+
+        <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
