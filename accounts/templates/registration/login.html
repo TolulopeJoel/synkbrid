@@ -3,9 +3,9 @@
 {% block title %} Login RemoteCollaborate {% endblock %}
 
 {% block content %}
-  <h1>Log-in</h1>
+  <h1 class="login-header">Log-in</h1>
   <p>Please, use the following form to log-in:</p>
-  <form method="post">
+  <form class="login" method="post">
     {{ form.as_p }}
     {% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}">
