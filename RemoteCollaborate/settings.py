@@ -45,11 +45,14 @@ INSTALLED_APPS = [
     
     # third party apps
     'django_filters',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,7 +81,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'RemoteCollaborate.wsgi.application'
 
 
-import dj_database_url
+# import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -138,6 +141,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'task_list'
-LOGIN_URL = 'accounts:login'
-LOGOUT_REDIRECT_URL = 'accounts:login'
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
