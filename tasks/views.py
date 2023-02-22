@@ -10,7 +10,7 @@ from .forms import TaskForm
 from .models import Task
 
 
-class TaskListView(FilterView):
+class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/task_list.html'
     filterset_class = TaskFilter
