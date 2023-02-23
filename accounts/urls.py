@@ -1,8 +1,6 @@
-from django.urls import path, include
-from . import views
-
-app_name = 'accounts'
+from django.urls import path
+from .views import CustomTokenObtainPairView
 
 urlpatterns = [
-    path('', include('django.contrib.auth.urls')),
+    path('api/auth/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]
