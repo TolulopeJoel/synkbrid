@@ -2,21 +2,18 @@ from rest_framework import serializers
 
 from .models import Task
 
-
-class AssigneePublicSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    username = serializers.CharField(read_only=True)
+from accounts.serializers import TeamSerializer
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    assignee = AssigneePublicSerializer(read_only=True)
+    team = TeamSerializer(read_only=True)
     
     class Meta:
         model = Task
         fields = [
             'id',
-            'assignee',
             'name',
+            'team',
             'description',
             'start_date',
             'due_date',
