@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+
+from accounts.models import Team
 
 
 class Task(models.Model):
@@ -10,16 +11,15 @@ class Task(models.Model):
         ('suspended', 'suspended'),
         ('completed', 'completed'),
     )
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='tasks')
     name = models.CharField(max_length=255)
     description = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()
-    assignee = models.ForeignKey(
-        get_user_model(),
-        related_name='assignee',
-        on_delete=models.CASCADE,
-    )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
         ordering = ('due_date',)
