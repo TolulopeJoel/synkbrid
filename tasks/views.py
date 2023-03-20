@@ -1,22 +1,25 @@
-from django.http import JsonResponse
-from django_filters.views import FilterView
+from rest_framework import viewsets
+
+from accounts.mixins import UserTeamQueryset
 
 from .models import Task
-
-
-from rest_framework import viewsets
 from .serializers import TaskSerializer
 
 
-class TaskViewset(viewsets.ModelViewSet):
+class TaskViewset(UserTeamQueryset, viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     return super().get_queryset().filter(assignee=user)
-
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user_queryset = []
+        
+        for team in queryset:
+            tasks = team.tasks.all()
+            for task in tasks:
+                user_queryset.append(task)
+        
+        return user_queryset
 
 
 # # A JSON representation of tasks to display tasks on calendar
