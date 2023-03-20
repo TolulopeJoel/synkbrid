@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # third party apps
     'django_filters',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
 ]
 
@@ -81,7 +82,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'RemoteCollaborate.wsgi.application'
 
 
-import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -129,9 +129,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -141,8 +138,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Rest Framework
-
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -151,14 +146,21 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
 
+from datetime import timedelta
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
