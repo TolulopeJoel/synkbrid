@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import generics
 
 from accounts.mixins import UserTeamQueryset
 
@@ -6,10 +6,11 @@ from .models import Task
 from .serializers import TaskSerializer
 
 
-class TaskViewset(UserTeamQueryset, viewsets.ModelViewSet):
+class TaskList(UserTeamQueryset, generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     
+    # return tasks for all team user is in.
     def get_queryset(self):
         queryset = super().get_queryset()
         user_queryset = []
@@ -21,6 +22,27 @@ class TaskViewset(UserTeamQueryset, viewsets.ModelViewSet):
         
         return user_queryset
 
+
+class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+# class TaskViewset(UserTeamQueryset, viewsets.ModelViewSet):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+    
+#     # return tasks for all team user is in.
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         user_queryset = []
+        
+#         for team in queryset:
+#             tasks = team.tasks.all()
+#             for task in tasks:
+#                 user_queryset.append(task)
+        
+#         return user_queryset
 
 # # A JSON representation of tasks to display tasks on calendar
 # def task_data(request):
