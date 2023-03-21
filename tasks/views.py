@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from accounts.mixins import UserTeamQueryset
+from accounts.models import Team
 
 from .models import Task
 from .serializers import TaskSerializer
@@ -21,6 +22,16 @@ class TaskList(UserTeamQueryset, generics.ListCreateAPIView):
                 user_queryset.append(task)
         
         return user_queryset
+    
+    def perform_create(self, serializer):
+        user = self.request.user
+        team_id = self.request.data.get('team_id')
+
+        try:
+            team = Team.objects.get(id=team_id)
+        except:
+            return False
+        return serializer.save(team=team)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
