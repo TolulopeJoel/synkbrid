@@ -13,3 +13,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class TeamViewset(UserTeamQueryset, viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        return serializer.save(assigner=user, teamates=[user])
