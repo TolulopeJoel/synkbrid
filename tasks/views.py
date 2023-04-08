@@ -31,6 +31,9 @@ class TaskList(UserTeamQueryset, generics.ListCreateAPIView):
         assignees_username= self.request.data.get('assignees_username')
         assignees_username = assignees_username.split(',')
 
+        if '' in assignees_username:
+            assignees_username.remove('') 
+
         team = Team.objects.get(id=team_id)
         teamates = team.teamates.all()
 

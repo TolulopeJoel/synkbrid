@@ -26,6 +26,9 @@ class TeamViewset(UserTeamQueryset, viewsets.ModelViewSet):
         teamate_emails = self.request.data.get('teamate_emails')
         teamate_emails = teamate_emails.split(',')
         
+        if '' in teamate_emails:
+            teamate_emails.remove('')
+        
         teamates = [user]
         for email in teamate_emails:
             try:
