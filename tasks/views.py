@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework import generics
-from rest_framework.views import Response
+from rest_framework.views import Response, status
 
 from accounts.mixins import UserTeamQueryset
 from accounts.models import Team
@@ -36,16 +36,17 @@ class TaskList(UserTeamQueryset, generics.ListCreateAPIView):
 
         assignees = []
         for username in assignees_username:
-            if username == '__all__temates__':
+            if username == '__all__teamates__':
                 assignees = [i for i in teamates]
-                break
-
-            try:
-                if user:=get_user_model().objects.get(username=username.strip()):
+            else:
+                try:
+                    user = get_user_model().objects.get(username=username.strip())
                     if user in teamates:
-                        return assignees.append(user)
-            except get_user_model().DoesNotExist:
-                return Response({'status': '404'})
+                        assignees.append(user)
+                    else:
+                        return Response({'detail': 'User in not in Team'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                except get_user_model().DoesNotExist:
+                    return Response({'detail': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
         return serializer.save(team=team, assignees=assignees)
 
