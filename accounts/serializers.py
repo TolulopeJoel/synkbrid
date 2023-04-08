@@ -17,6 +17,7 @@ class PublicTasksSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(read_only=True)
     description = serializers.CharField(read_only=True)
+    assignees = PublicPersonSerializer(read_only=True, many=True)
     start_date = serializers.DateTimeField(read_only=True)
     due_date = serializers.DateTimeField(read_only=True)
     status = serializers.DateTimeField(read_only=True)
