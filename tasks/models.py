@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from accounts.models import Team
 
@@ -14,6 +15,7 @@ class Task(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='tasks')
     name = models.CharField(max_length=255)
     description = models.TextField()
+    assignees = models.ManyToManyField(get_user_model())
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()

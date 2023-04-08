@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
+
 from rest_framework import generics
+from rest_framework.views import Response
 
 from accounts.mixins import UserTeamQueryset
 from accounts.models import Team
@@ -24,14 +27,27 @@ class TaskList(UserTeamQueryset, generics.ListCreateAPIView):
         return user_queryset
     
     def perform_create(self, serializer):
-        user = self.request.user
         team_id = self.request.data.get('team_id')
+        assignees_username= self.request.data.get('assignees_username')
+        assignees_username = assignees_username.split(',')
 
-        try:
-            team = Team.objects.get(id=team_id)
-        except:
-            return False
-        return serializer.save(team=team)
+        team = Team.objects.get(id=team_id)
+        teamates = team.teamates.all()
+
+        assignees = []
+        for username in assignees_username:
+            if username == '__all__temates__':
+                assignees = [i for i in teamates]
+                break
+
+            try:
+                if user:=get_user_model().objects.get(username=username.strip()):
+                    if user in teamates:
+                        return assignees.append(user)
+            except get_user_model().DoesNotExist:
+                return Response({'status': '404'})
+
+        return serializer.save(team=team, assignees=assignees)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
