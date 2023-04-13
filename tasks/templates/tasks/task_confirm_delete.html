@@ -1,6 +1,0 @@
-<form class='edit_delete_form' method="POST" action="">
-    {% csrf_token %}
-    <p>are you sure you want to delete {{object_list.title}} ??</p>
-    <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
-    <input value="confirm" type="submit" />
-</form>
