@@ -12,7 +12,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import dj_database_url
 import os
+from datetime import timedelta
+from environs import Env
 from pathlib import Path
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qnm&l9$9web_zz7(d6ve#ez8w=am0&4t=-4+re)!cw6=g7@fw7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['.railway.app', 'localhost']
 
