@@ -3,13 +3,5 @@ from .models import Team
 
 class UserTeamQueryset():
     def get_queryset(self):
-        queryset = Team.objects.all()
         user = self.request.user
-        user_queryset = []
-
-        for team in queryset:
-            teamates = team.teamates.all()
-            if user in teamates:
-                user_queryset.append(team.id)
-
-        return Team.objects.filter(id__in=user_queryset)
+        return Team.objects.filter(teamates=user)

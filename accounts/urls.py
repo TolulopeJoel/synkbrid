@@ -10,7 +10,7 @@ urlpatterns = [
 
 router = SimpleRouter()
 
-router.register('teams', views.TeamViewset, basename='teams')
+router.register('teams', views.TeamViewset, basename='team')
 
 
 urlpatterns += router.urls
