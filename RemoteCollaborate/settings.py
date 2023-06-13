@@ -107,11 +107,10 @@ DATABASES = {
     'OPTIONS': {
         'ssl': {'ca': env.str('MYSQL_ATTR_SSL_CA', )},
         'charset': 'utf8mb4', 
+        'ssl_mode': 'DISABLED',
     }
   }
 }
-
-pymysql.install_as_MySQLdb()
 
 
 # Password validation
