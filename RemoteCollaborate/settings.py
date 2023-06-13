@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from datetime import timedelta
-from environs import Env
 from pathlib import Path
+
+import pymysql
+from environs import Env
 
 env = Env()
 env.read_env()
@@ -31,7 +33,7 @@ SECRET_KEY = 'django-insecure-qnm&l9$9web_zz7(d6ve#ez8w=am0&4t=-4+re)!cw6=g7@fw7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['.railway.app', '.onrender.com', 'localhost',]
+ALLOWED_HOSTS = ['.railway.app', '.onrender.com', 'localhost', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com']
 
@@ -109,6 +111,8 @@ DATABASES = {
   }
 }
 
+pymysql.install_as_MySQLdb()
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -172,7 +176,6 @@ REST_FRAMEWORK = {
 }
 
 from datetime import timedelta
-
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
