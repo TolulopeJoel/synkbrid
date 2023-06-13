@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+import dj_database_url
 import pymysql
 from environs import Env
 
@@ -97,20 +98,14 @@ WSGI_APPLICATION = 'RemoteCollaborate.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-  'default': {
-    'ENGINE': 'django_psdb_engine',
-    'NAME': env.str('DB_NAME'),
-    'HOST': env.str('DB_HOST'),
-    'PORT': env.str('DB_PORT'),
-    'USER': env.str('DB_USER'),
-    'PASSWORD': env.str('DB_PASSWORD'),
-    'OPTIONS': {
-        'ssl': {'ca': env.str('MYSQL_ATTR_SSL_CA', )},
-        'charset': 'utf8mb4', 
-        'ssl_mode': 'DISABLED',
+    'default': {
+        'ENGINE': 'django_psdb_engine',
+        'NAME': env.str('DB_NAME'),
     }
-  }
 }
+
+
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Password validation
