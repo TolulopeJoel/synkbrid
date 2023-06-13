@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-qnm&l9$9web_zz7(d6ve#ez8w=am0&4t=-4+re)!cw6=g7@fw7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['.railway.app', 'onrender.com', 'localhost',]
+ALLOWED_HOSTS = ['.railway.app', '.onrender.com', 'localhost',]
 
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
 
