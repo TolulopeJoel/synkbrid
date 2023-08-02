@@ -6,6 +6,9 @@ from .models import Task
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Task model.
+    """
     assignees = PublicPersonSerializer(many=True, read_only=True)
 
     class Meta:

@@ -48,11 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # local apps
     'tasks.apps.TasksConfig',
     'accounts.apps.AccountsConfig',
-    
+
     # third party apps
     'django_filters',
     'rest_framework',
@@ -78,7 +78,7 @@ ROOT_URLCONF = 'RemoteCollaborate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +105,7 @@ DATABASES = {
 }
 
 
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -169,7 +169,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -177,6 +176,6 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000',
-     'https://rc-prj-mng.netlify.app',
+    'http://localhost:3000',
+    'https://rc-prj-mng.netlify.app',
 ]

@@ -6,22 +6,34 @@ from rest_framework.test import APIClient
 
 from accounts.models import Team
 from .models import Task
-from .serializers import TaskSerializer
 
 
 class TaskModelTest(TestCase):
+    """
+    Test cases for the Task model.
+    """
+
     def setUp(self):
+        """
+        Setup method to create required objects before running tests.
+        """
+        # Create a test user
         self.user = get_user_model().objects.create_user(
             username='testuser',
             email='testuser@test.com',
             password='testpass123'
         )
+
+        # Create a test team
         self.team = Team.objects.create(
             name='Test Team',
             assigner=self.user
         )
 
     def test_task_creation(self):
+        """
+        Test if a task can be created and its string representation is correct.
+        """
         task = Task.objects.create(
             team=self.team,
             name='Test Task',
@@ -34,19 +46,32 @@ class TaskModelTest(TestCase):
 
 
 class TaskViewTest(TestCase):
+    """
+    Test cases for Task views.
+    """
+
     def setUp(self):
+        """
+        Setup method to create required objects before running tests.
+        """
+        # Create an API client for making requests
         self.client = APIClient()
+
+        # Create a test user
         self.user = get_user_model().objects.create_user(
             username='testuser',
             email='testuser@test.com',
             password='testpass123'
         )
+
+        # Create a test team
         self.team = Team.objects.create(
             name='Test Team',
             assigner=self.user
         )
         self.team.teamates.set([self.user])
 
+        # Create test tasks and assign them to the test user
         self.task1 = Task.objects.create(
             team=self.team,
             name='Test Task 1',
@@ -68,6 +93,9 @@ class TaskViewTest(TestCase):
         self.task2.assignees.set([self.user])
 
     def test_get_task_list(self):
+        """
+        Test retrieving a list of tasks.
+        """
         self.client.force_authenticate(user=self.user)
         url = reverse('task-list')
         response = self.client.get(url, format='json')
@@ -75,6 +103,9 @@ class TaskViewTest(TestCase):
         self.assertEqual(len(response.data['results']), 2)
 
     def test_create_task(self):
+        """
+        Test creating a new task.
+        """
         self.client.force_authenticate(user=self.user)
         url = reverse('task-list')
         data = {
@@ -91,14 +122,21 @@ class TaskViewTest(TestCase):
         self.assertEqual(Task.objects.count(), 3)
 
     def test_update_task(self):
+        """
+        Test updating a task's status.
+        """
         self.client.force_authenticate(user=self.user)
         url = reverse('task-detail', args=[self.task1.id])
         data = {'status': 'in-progress'}
         response = self.client.patch(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Task.objects.get(id=self.task1.id).status, 'in-progress')
+        self.assertEqual(Task.objects.get(
+            id=self.task1.id).status, 'in-progress')
 
     def test_delete_task(self):
+        """
+        Test deleting a task.
+        """
         self.client.force_authenticate(user=self.user)
         url1 = reverse('task-detail', args=[self.task1.id])
         url2 = reverse('task-detail', args=[self.task2.id])
@@ -107,4 +145,3 @@ class TaskViewTest(TestCase):
         self.assertEqual(response1.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(response2.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Task.objects.count(), 0)
-       
