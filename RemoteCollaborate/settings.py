@@ -15,7 +15,6 @@ from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
-import pymysql
 from environs import Env
 
 env = Env()
@@ -55,6 +54,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'django_filters',
+    'drf_spectacular',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -97,15 +97,23 @@ WSGI_APPLICATION = 'RemoteCollaborate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django_psdb_engine',
-        'NAME': env.str('DB_NAME'),
+PRODUCTION_SERVER = False
+
+if not PRODUCTION_SERVER:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
-
-DATABASES['default'] = dj_database_url.config()
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django_psdb_engine',
+            'NAME': env.str('DB_NAME'),
+        }
+    }
+    DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -167,6 +175,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
