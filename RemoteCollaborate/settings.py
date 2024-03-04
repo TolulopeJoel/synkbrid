@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # local apps
     'tasks.apps.TasksConfig',
+    'teams.apps.TeamsConfig',
     'accounts.apps.AccountsConfig',
 
     # third party apps

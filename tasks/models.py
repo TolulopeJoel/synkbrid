@@ -1,7 +1,7 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
-from accounts.models import Team
+from teams.models import Team
 
 
 class Task(models.Model):

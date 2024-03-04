@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import Team
-
 
 class PublicPersonSerializer(serializers.Serializer):
     """
@@ -29,26 +27,6 @@ class PublicTasksSerializer(serializers.Serializer):
     start_date = serializers.DateTimeField(read_only=True)
     due_date = serializers.DateTimeField(read_only=True)
     status = serializers.DateTimeField(read_only=True)
-
-
-class TeamSerializer(serializers.ModelSerializer):
-    """
-    Serializer for Team model data.
-    """
-
-    assigner = PublicPersonSerializer(read_only=True)
-    teamates = PublicPersonSerializer(read_only=True, many=True)
-    tasks = PublicTasksSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = Team
-        fields = [
-            'id',
-            'name',
-            'assigner',
-            'tasks',
-            'teamates',
-        ]
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.views import Response, status
 
-from accounts.mixins import UserTeamQueryset
-from accounts.models import Team
+from teams.mixins import UserTeamQueryset
+from teams.models import Team
 
 from .models import Task
 from .serializers import TaskSerializer
