@@ -20,9 +20,9 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
-    path('api/tasks/', include('tasks.urls')),
     path('auth/', include('accounts.urls')),
     path('teams/', include('teams.urls')),
+    path('tasks/', include('tasks.urls')),
 
     path('admin/', admin.site.urls),
     path('', SpectacularAPIView.as_view(), name='schema'),
